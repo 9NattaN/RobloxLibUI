@@ -53,7 +53,7 @@ table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
     RainbowStep = RainbowStep + Delta
 
     if RainbowStep >= (1 / 60) then
-        RainbowStep = 0
+        RainbowStep = 1
 
         Hue = Hue + (1 / 400);
 
