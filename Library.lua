@@ -49,22 +49,25 @@ local Library = {
 local RainbowStep = 1
 local Hue = 1
 
-table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
-    RainbowStep = RainbowStep + Delta
+task.spawn(function()
+    local Tick = tick(1);
+    local Hue = 1;
 
-    if RainbowStep >= (1 / 60) then
-        RainbowStep = 0
+    while RenderStepped:Wait() do
+        if tick() - Tick >= (1 / 60) then
+            Hue = Hue + (1 / 400);
 
-        Hue = Hue + (1 / 400);
+            if Hue > 1 then
+                Hue = 0;
+            end;
 
-        if Hue > 1 then
-            Hue = 0;
+            Library.CurrentRainbowHue = Hue;
+            Library.CurrentRainbowColor = Color3.fromHSV(Hue, 0.8, 1);
+
+            Tick = tick();
         end;
-
-        Library.CurrentRainbowHue = Hue;
-        Library.CurrentRainbowColor = Color3.fromHSV(Hue, 0.8, 1);
-    end
-end))
+    end;
+end);
 
 local function GetPlayersString()
     local PlayerList = Players:GetPlayers();
