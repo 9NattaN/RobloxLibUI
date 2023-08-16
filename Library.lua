@@ -32,7 +32,7 @@ local Library = {
     FontColor = Color3.fromRGB(255, 255, 255);
     MainColor = Color3.fromRGB(28, 28, 28);
     BackgroundColor = Color3.fromRGB(20, 20, 20);
-    AccentColor = Color3.fromRGB(0, 85, 255);
+    AccentColor = Color3.fromRGB(0, 255, 0);
     OutlineColor = Color3.fromRGB(50, 50, 50);
     RiskColor = Color3.fromRGB(255, 50, 50),
 
@@ -46,28 +46,25 @@ local Library = {
     ScreenGui = ScreenGui;
 };
 
-local RainbowStep = 1
-local Hue = 1
+local RainbowStep = 0
+local Hue = 0
 
-task.spawn(function()
-    local Tick = tick(1);
-    local Hue = 1;
+table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
+    RainbowStep = RainbowStep + Delta
 
-    while RenderStepped:Wait() do
-        if tick() - Tick >= (1 / 60) then
-            Hue = Hue + (1 / 400);
+    if RainbowStep >= (1 / 60) then
+        RainbowStep = 0
 
-            if Hue > 1 then
-                Hue = 0;
-            end;
+        Hue = Hue + (1 / 400);
 
-            Library.CurrentRainbowHue = Hue;
-            Library.CurrentRainbowColor = Color3.fromHSV(Hue, 0.8, 1);
-
-            Tick = tick();
+        if Hue > 1 then
+            Hue = 0;
         end;
-    end;
-end);
+
+        Library.CurrentRainbowHue = Hue;
+        Library.CurrentRainbowColor = Color3.fromHSV(Hue, 0.8, 1);
+    end
+end))
 
 local function GetPlayersString()
     local PlayerList = Players:GetPlayers();
