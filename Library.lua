@@ -47,18 +47,18 @@ local Library = {
 };
 
 local RainbowStep = 30
-local Hue = 1
+local Hue = 0
 
 table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
     RainbowStep = RainbowStep + Delta
 
     if RainbowStep >= (1 / 60) then
-        RainbowStep = 30
+        RainbowStep = 0
 
         Hue = Hue + (1 / 400);
 
         if Hue > 1 then
-            Hue = 1;
+            Hue = 0;
         end;
 
         Library.CurrentRainbowHue = Hue;
