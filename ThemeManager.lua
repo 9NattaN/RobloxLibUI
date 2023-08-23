@@ -1,6 +1,6 @@
 local httpService = game:GetService('HttpService')
 local ThemeManager = {} do
-	ThemeManager.Folder = 'TBLOX HUB(Ro Ghoul)'
+	ThemeManager.Folder = 'TBLOX HUB (Ro Ghoul)'
 	-- if not isfolder(ThemeManager.Folder) then makefolder(ThemeManager.Folder) end
 
 	ThemeManager.Library = nil
