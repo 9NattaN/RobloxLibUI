@@ -1,7 +1,7 @@
 local httpService = game:GetService('HttpService')
 
 local SaveManager = {} do
-	SaveManager.Folder = 'TBLOX HUB(Ro Ghoul)'
+	SaveManager.Folder = 'TBLOX HUB (Ro Ghoul)'
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
